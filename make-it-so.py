@@ -300,7 +300,12 @@ def webhook():
     owner_repo = '{}/{}'.format(owner, repo)
     token = current_app.config['HOOK_SECRETS_TOKENS'].get(owner_repo, {}).get('token')
     
-    post_github_status(status_url, status, (token, 'x-oauth-basic'))
+    try:
+        post_github_status(status_url, status, (token, 'x-oauth-basic'))
+    except ValueError as err:
+        if err.message.startswith('Failed status post to https://api.github.com'):
+            return make_response(err.message, 403)
+        raise
     
     return 'Yo.'
 
