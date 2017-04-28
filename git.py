@@ -256,6 +256,9 @@ def get_circle_artifacts(owner, repo, ref, GET):
 
     artifacts_base = find_base_path(owner, repo, ref, GET)
     artifacts_url = _CIRCLECI_ARTIFACTS_URL.format(owner=owner, repo=repo, build=circle_build, token=circle_token)
+    
+    app.logger.debug('artifacts_url {}'.format(artifacts_url))
+
     artifacts_list = GET(artifacts_url, _LONGTIME, timeout=10).json()
 
     return _prepare_artifacts(artifacts_list, artifacts_base, circle_token)
