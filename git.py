@@ -35,7 +35,7 @@ _GITHUB_COMMIT_URL = 'https://api.github.com/repos/{owner}/{repo}/commits/{sha}'
 _GITHUB_TREE_URL = 'https://api.github.com/repos/{owner}/{repo}/git/trees/{ref}'
 _GITHUB_HEADS_URL = 'https://api.github.com/repos/{owner}/{repo}/git/refs/heads'
 _GITHUB_STATUS_URL = 'https://api.github.com/repos/{owner}/{repo}/statuses/{ref}'
-_CIRCLECI_ARTIFACTS_URL = 'https://circleci.com/api/v1/project/{build}/artifacts?circle-token={token}'
+_CIRCLECI_ARTIFACTS_URL = 'https://circleci.com/api/v1.1/project/github/{owner}/{repo}/{build}/artifacts?circle-token={token}'
 
 _LONGTIME = 3600
 _defaultcache = {}
@@ -61,7 +61,7 @@ class Getter:
 
     def get(self, url, lifespan=5, timeout=5):
         self._flush()
-        
+
         host = urlparse(url).hostname
         is_github = (host == 'api.github.com')
         is_noauth = (self.github_auth and self.github_auth[0] == FAKE_TOKEN)
@@ -255,7 +255,7 @@ def get_circle_artifacts(owner, repo, ref, GET):
     circle_build = relpath(urlparse(circle_url).path, '/gh/')
 
     artifacts_base = find_base_path(owner, repo, ref, GET)
-    artifacts_url = _CIRCLECI_ARTIFACTS_URL.format(build=circle_build, token=circle_token)
+    artifacts_url = _CIRCLECI_ARTIFACTS_URL.format(owner=owner, repo=repo, build=circle_build, token=circle_token)
     artifacts_list = GET(artifacts_url, _LONGTIME, timeout=10).json()
 
     return _prepare_artifacts(artifacts_list, artifacts_base, circle_token)
