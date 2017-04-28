@@ -260,6 +260,7 @@ def get_circle_artifacts(owner, repo, ref, GET):
     getLogger('precog').warning('artifacts_url {}'.format(artifacts_url))
 
     artifacts_list = GET(artifacts_url, _LONGTIME, timeout=10).json()
+    getLogger('precog').warning('artifacts_list {}'.format(artifacts_list))
 
     return _prepare_artifacts(artifacts_list, artifacts_base, circle_token)
 
