@@ -431,7 +431,7 @@ def repo_ref_path(account, repo, ref_path):
 
     try:
         artifacts = get_circle_artifacts(account, repo, ref, GET)
-        getLogger('precog').warn('artifacts {}'.format(artifacts))
+        getLogger('precog').warn('select_path {}'.format(select_path(artifacts, path)))
         artifact_url = artifacts.get(select_path(artifacts, path))
     except RuntimeError as err:
         vars = dict(error=err, codes=err_codes, git_ref=ref)
