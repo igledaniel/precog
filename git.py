@@ -263,7 +263,7 @@ def get_circle_artifacts(owner, repo, ref, GET):
 def _prepare_artifacts(list, base, circle_token):
     '''
     '''
-    if base == '$CIRCLE_ARTIFACTS:
+    if base == '$CIRCLE_ARTIFACTS':
         # circle no longer shows things at $CIRCLE_ARTIFACTS, we now have a
         # randomized path, so pull out an example base path via regex
         example_path = next(iter(list))['pretty_path']
