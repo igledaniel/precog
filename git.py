@@ -273,6 +273,8 @@ def _prepare_artifacts(list, base, circle_token):
                  for a in list}
 
     getLogger('precog').warning('firstpath {}'.format(list[0]['pretty_path']))
+    getLogger('precog').warning('relpath1 {}'.format(relpath(list[0]['pretty_path'], base)))
+    getLogger('precog').warning('relpath2 {}'.format(relpath('/' + list[0]['pretty_path'], base)))
 
     getLogger('precog').warning('artifacts {}'.format(next(iter(artifacts))))
     getLogger('precog').warning('PRECOG_TARBALL_NAME {}'.format(PRECOG_TARBALL_NAME))
