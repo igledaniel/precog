@@ -258,7 +258,7 @@ def get_circle_artifacts(owner, repo, ref, GET):
     artifacts_url = _CIRCLECI_ARTIFACTS_URL.format(build=circle_build, token=circle_token)
 
 
-    getLogger('precog').warn('artifacts_base {}'.format(artifacts_base)
+    getLogger('precog').warn('artifacts_base {}'.format(artifacts_base))
 
     getLogger('precog').warning('artifacts_url {}'.format(artifacts_url))
 
