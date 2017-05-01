@@ -273,7 +273,7 @@ def _prepare_artifacts(list, base, circle_token):
 
     if PRECOG_TARBALL_NAME in artifacts:
         tarball_artifacts = _make_local_tarball(artifacts[PRECOG_TARBALL_NAME])
-        
+
         getLogger('precog').warning('tarball_artifacts {}'.format(tarball_artifacts))
 
         artifacts, raw_artifacts = tarball_artifacts, artifacts
@@ -281,6 +281,7 @@ def _prepare_artifacts(list, base, circle_token):
         # Files in artifacts override those in tarball
         artifacts.update(raw_artifacts)
 
+    getLogger('precog').warning('artifacts length {}'.format(len(artifacts)))
     return artifacts
 
 def _make_local_tarball(url):
