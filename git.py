@@ -257,6 +257,9 @@ def get_circle_artifacts(owner, repo, ref, GET):
     artifacts_base = find_base_path(owner, repo, ref, GET)
     artifacts_url = _CIRCLECI_ARTIFACTS_URL.format(build=circle_build, token=circle_token)
 
+
+    getLogger('precog').warn('artifacts_base {}'.format(artifacts_base)
+
     getLogger('precog').warning('artifacts_url {}'.format(artifacts_url))
 
     artifacts_list = GET(artifacts_url, _LONGTIME, timeout=10).json()
@@ -269,6 +272,7 @@ def _prepare_artifacts(list, base, circle_token):
     artifacts = {relpath(a['pretty_path'], base): '{}?circle-token={}'.format(a['url'], circle_token)
                  for a in list}
 
+    getLogger('precog').warning('artifacts {}'.format(next(iter(artifacts))))
     getLogger('precog').warning('PRECOG_TARBALL_NAME {}'.format(PRECOG_TARBALL_NAME))
 
     if PRECOG_TARBALL_NAME in artifacts:
