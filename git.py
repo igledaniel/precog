@@ -263,7 +263,7 @@ def get_circle_artifacts(owner, repo, ref, GET):
 def _prepare_artifacts(list, base, circle_token):
     '''
     '''
-    artifacts = {relpath(a['pretty_path'], base): '{}?circle-token={}'.format(a['url'], circle_token)
+    artifacts = {relpath('/' + a['pretty_path'], base): '{}?circle-token={}'.format(a['url'], circle_token)
                  for a in list}
 
     if PRECOG_TARBALL_NAME in artifacts:
