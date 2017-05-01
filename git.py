@@ -267,7 +267,7 @@ def _prepare_artifacts(list, base, circle_token):
         # circle no longer shows things at $CIRCLE_ARTIFACTS, we now have a
         # randomized path, so pull out an example base path via regex
         example_path = next(iter(list))['pretty_path']
-        base = '/' + match('.*/circle-artifacts[^/]*', example_path)
+        base = '/' + match('.*/circle-artifacts[^/]*', example_path).group(0)
 
     artifacts = {relpath('/' + a['pretty_path'], base): '{}?circle-token={}'.format(a['url'], circle_token)
                  for a in list}
