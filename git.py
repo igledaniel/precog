@@ -266,6 +266,9 @@ def _prepare_artifacts(list, base, circle_token):
     artifacts = {relpath('/' + a['pretty_path'], base): '{}?circle-token={}'.format(a['url'], circle_token)
                  for a in list}
 
+    example = next(iter(artifacts))
+    getLogger('precog').warning('example pretty_path {} base {}'.format(example['pretty_path'], base))
+
     if PRECOG_TARBALL_NAME in artifacts:
         tarball_artifacts = _make_local_tarball(artifacts[PRECOG_TARBALL_NAME])
         artifacts, raw_artifacts = tarball_artifacts, artifacts
